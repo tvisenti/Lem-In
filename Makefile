@@ -6,7 +6,7 @@
 #    By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/06/08 10:27:37 by tvisenti          #+#    #+#              #
-#    Updated: 2016/06/08 10:45:54 by tvisenti         ###   ########.fr        #
+#    Updated: 2016/06/08 12:12:31 by tvisenti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ FLAGS = -Wall -Wextra -Werror
 
 CPP_FLAGS = -Iinclude
 
-NAME = libftprintf.a
+NAME = lem-in
 
 SRC_PATH = ./src
 LIB_PATH = ./lib
@@ -39,6 +39,7 @@ INC = $(addprefix $(INC_PATH)/, $(INC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
 all: $(NAME)
+	@cd ./libft && $(MAKE)
 
 $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)
@@ -47,7 +48,7 @@ $(NAME): $(OBJ)
 	@echo "|   |_  |\/|    | |\ |"
 	@echo "| , |   |  | ~~ | | \|"
 	@echo "~~~ ~~~ ~  ~    ~ ~  ~"
-	@echo "\033[1;34mft_printf\t\033[1;33mCompilation\t\033[0;32m[OK]\033[0m"
+	@echo "\033[1;34mft_printf\t\033[1;33mCompilation\t\033[0;32m-OK-\033[0m"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
@@ -55,14 +56,16 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 
 clean:
 	@rm -rf $(OBJ)
-	@echo "\033[1;34mft_printf\t\033[1;33mCleaning obj\t\033[0;32m[OK]\033[0m"
+	@echo "\033[1;34mft_printf\t\033[1;33mCleaning obj\t\033[0;32m-OK-\033[0m"
 
 fclean: clean
 	@rm -rf ./obj $(NAME)
-	@echo "\033[1;34mft_printf\t\033[1;33mCleaning lib\t\033[0;32m[OK]\033[0m"
+	@echo "\033[1;34mft_printf\t\033[1;33mCleaning lib\t\033[0;32m-OK-\033[0m"
+	@cd ./libft && $(MAKE) fclean
 
 re: fclean all
 
 norme:
 	@norminette $(SRC) $(LIB) $(INC)
-	@echo "\033[1;34mft_printf\t\033[1;33mNorminette\t\033[0;32m[OK]\033[0m"
+	@echo "\033[1;34mft_printf\t\033[1;33mNorminette\t\033[0;32m-OK-\033[0m"
+	@cd ./libft && $(MAKE) norme
