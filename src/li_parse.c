@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 09:39:27 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/15 10:13:12 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/15 11:32:56 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,13 @@ int		li_check_coord(char *str, char **tab, t_lem *lst)
 
 	i = 0;
 	if (li_is_exist(tab[i], lst) == 0)
+	{
+		free(tab);
 		return (0);
+	}
 	x = ft_atoi(tab[++i]);
 	y = ft_atoi(tab[++i]);
-	free(tab);
+	// free(tab);
 	if (x == -0 || y == -0)
 		return (0);
 	return (1);
@@ -78,9 +81,12 @@ int		li_room_tube(char *line, t_lem *lst)
 		tab = ft_strsplit(line, '-');
 		r1 = li_find_elem(lst, r1, tab[0]);
 		r2 = li_find_elem(lst, r2, tab[1]);
-		if (!r1 && !r2)
+		free(tab);
+		if (!r1 || !r2)
 			return (0);
 		lst->begin_tube = 1;
+		printf("start : %s\n", lst->name_start);
+		printf("end : %s\n", lst->name_end);
 		li_make_link(lst, r1, r2);
 		return (1);
 	}
@@ -88,6 +94,7 @@ int		li_room_tube(char *line, t_lem *lst)
 	{
 		tab = ft_strsplit(line, ' ');
 		li_check_coord(line, tab, lst);
+		free(tab);
 		return (1);
 	}
 	return (0);
@@ -100,6 +107,7 @@ int		li_start_end(char *line, t_lem *lst, int start)
 
 	i = 0;
 	get_next_line(0, &line);
+	// ft_putstrn(line);
 	if (line[0] == 'L' || line[0] == '#')
 		return (0);
 	tab = ft_strsplit(line, ' ');
@@ -108,7 +116,11 @@ int		li_start_end(char *line, t_lem *lst, int start)
 	else if (start == 2)
 		lst->name_end = ft_strdup(tab[0]);
 	if (li_check_coord(line, tab, lst) == 0)
+	{
+		free(tab);
 		return (0);
+	}
+	free(tab);
 	return (1);
 }
 
@@ -134,6 +146,7 @@ int		li_get_ants(char *line, t_lem *lst)
 	int	nb;
 
 	get_next_line(0, &line);
+	ft_putstrn(line);
 	nb = ft_atoi(line);
 	if (nb == -0 || nb < 0)
 		return (0);
@@ -143,15 +156,16 @@ int		li_get_ants(char *line, t_lem *lst)
 
 int		li_parse(char *line, t_lem *lst)
 {
+	int	i = 0;
 	if (li_get_ants(line, lst) == 0)
 		return (0);
-	printf("ants : %d\n", lst->ants);
 	while (get_next_line(0, &line) > 0)
 	{
+		// ft_putstrn(line);
 		if (line[0] == '#')
 			li_sharp(line, lst);
 		else if (li_room_tube(line, lst) == 0)
-			printf("str : %s\n", line);
+			i = 1;
 	}
 	return (1);
 }
