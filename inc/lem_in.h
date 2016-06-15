@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 12:06:51 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/15 10:11:08 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/15 17:42:48 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct		s_salle
 	int				poids;
 	char			*name;
 	struct s_salle	*next;
+	struct s_salle	**tube;
 }					t_salle;
 
 typedef struct		s_lem

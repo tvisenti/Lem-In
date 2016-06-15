@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 09:39:27 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/15 11:52:37 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/15 18:36:47 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,28 @@ int		li_check_coord(char *str, char **tab, t_lem *lst)
 	return (1);
 }
 
-int		li_make_link(t_lem *lst, t_salle *r1, t_salle *r2)
+t_salle		*li_make_link(t_lem *lst, t_salle *r1, t_salle *r2)
 {
-	return (1);
+	int	i;
+	t_salle **new;
+
+	i = 0;
+	if (!r1->tube)
+	{
+		r1->tube = malloc(sizeof(t_salle*) * 2);
+		r1->tube[0] = r2;
+		r1->tube[1] = NULL;
+	}
+	else
+	{
+		while (r1->tube[i] != NULL)
+			i++;
+		new = malloc(sizeof(t_salle*) * i + 2);
+		'fonction boucle qui copie r1->tube dans new'
+		new[i] = r2;
+		new[++i] = NULL;
+	}
+	return (r1);
 }
 
 t_salle	*li_find_elem(t_lem *lst, t_salle *elem, char *str)
@@ -88,7 +107,8 @@ int		li_room_tube(char *line, t_lem *lst)
 			return (0);
 		}
 		lst->begin_tube = 1;
-		li_make_link(lst, r1, r2);
+		r1 = li_make_link(lst, r1, r2);
+		r2 = li_make_link(lst, r2, r1);
 		printf("VALID\n");
 		return (1);
 	}
