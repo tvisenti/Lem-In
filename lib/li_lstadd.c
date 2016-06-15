@@ -6,14 +6,14 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/13 12:00:31 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/13 18:32:52 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/15 10:12:00 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/lem_in.h"
 #include "../libft/inc/libft.h"
 
-t_lem		*li_lstadd(t_lem *lst, char *str, int start)
+t_lem		*li_lstadd(t_lem *lst, char *str)
 {
 	t_salle	*new;
 
@@ -23,7 +23,7 @@ t_lem		*li_lstadd(t_lem *lst, char *str, int start)
 		{
 			new->next = NULL;
 			new->name = ft_strdup(str);
-			if (start == 1)
+			if (lst->end == NULL)
 			{
 				lst->start = new;
 				lst->end = new;

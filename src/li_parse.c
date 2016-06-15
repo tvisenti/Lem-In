@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 09:39:27 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/15 10:00:45 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/15 10:13:12 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		li_is_exist(char *str, t_lem *lst)
 
 	if (lst->start == NULL)
 	{
-		lst = li_lstadd(lst, str, start);
+		lst = li_lstadd(lst, str);
 		return (1);
 	}
 	tmp = lst->start;
@@ -29,20 +29,19 @@ int		li_is_exist(char *str, t_lem *lst)
 			return (0);
 		tmp = tmp->next;
 	}
-	lst = li_lstadd(lst, str, start);
+	lst = li_lstadd(lst, str);
 	return (1);
 }
 
-int		li_check_coord(char *str, char **tab, int start, t_lem *lst)
+int		li_check_coord(char *str, char **tab, t_lem *lst)
 {
 	int	i;
 	int	x;
 	int	y;
 
 	i = 0;
-	if (li_is_exist(tab[i], start, lst) == 0)
+	if (li_is_exist(tab[i], lst) == 0)
 		return (0);
-	printf("JE RENTRE DANS ADD\n");
 	x = ft_atoi(tab[++i]);
 	y = ft_atoi(tab[++i]);
 	free(tab);
@@ -61,16 +60,10 @@ t_salle	*li_find_elem(t_lem *lst, t_salle *elem, char *str)
 	elem = lst->start;
 	while (elem)
 	{
-		printf("str : %s\n", str);
-		printf("elem : %s\n", elem->name);
 		if (ft_strcmp(elem->name, str) == 0)
-		{
-			printf("OUI\n");
 			return (elem);
-		}
 		elem = elem->next;
 	}
-	printf("NULL\n");
 	return (NULL);
 }
 
@@ -94,7 +87,7 @@ int		li_room_tube(char *line, t_lem *lst)
 	else if (ft_strnlen(line, ' ') + 1 > 0 && lst->begin_tube == 0)
 	{
 		tab = ft_strsplit(line, ' ');
-		li_check_coord(line, tab, 0, lst);
+		li_check_coord(line, tab, lst);
 		return (1);
 	}
 	return (0);
@@ -114,7 +107,7 @@ int		li_start_end(char *line, t_lem *lst, int start)
 		lst->name_start = ft_strdup(tab[0]);
 	else if (start == 2)
 		lst->name_end = ft_strdup(tab[0]);
-	if (li_check_coord(line, tab, start, lst) == 0)
+	if (li_check_coord(line, tab, lst) == 0)
 		return (0);
 	return (1);
 }
