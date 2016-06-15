@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 09:39:27 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/15 11:32:56 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/15 11:52:37 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,9 @@ int		li_check_coord(char *str, char **tab, t_lem *lst)
 
 	i = 0;
 	if (li_is_exist(tab[i], lst) == 0)
-	{
-		free(tab);
 		return (0);
-	}
 	x = ft_atoi(tab[++i]);
 	y = ft_atoi(tab[++i]);
-	// free(tab);
 	if (x == -0 || y == -0)
 		return (0);
 	return (1);
@@ -64,9 +60,13 @@ t_salle	*li_find_elem(t_lem *lst, t_salle *elem, char *str)
 	while (elem)
 	{
 		if (ft_strcmp(elem->name, str) == 0)
+		{
+			printf("salle : %s - str : %s\n", elem->name, str);
 			return (elem);
+		}
 		elem = elem->next;
 	}
+	printf("salle : not found = %s\n", str);
 	return (NULL);
 }
 
@@ -83,11 +83,13 @@ int		li_room_tube(char *line, t_lem *lst)
 		r2 = li_find_elem(lst, r2, tab[1]);
 		free(tab);
 		if (!r1 || !r2)
+		{
+			printf("INVALID\n");
 			return (0);
+		}
 		lst->begin_tube = 1;
-		printf("start : %s\n", lst->name_start);
-		printf("end : %s\n", lst->name_end);
 		li_make_link(lst, r1, r2);
+		printf("VALID\n");
 		return (1);
 	}
 	else if (ft_strnlen(line, ' ') + 1 > 0 && lst->begin_tube == 0)
@@ -128,13 +130,13 @@ int		li_sharp(char *line, t_lem *lst)
 {
 	if (ft_strcmp("##start", line) == 0)
 	{
-		if (li_start_end(line, lst, 1) == 0)
+		if (lst->name_start != NULL || li_start_end(line, lst, 1) == 0)
 			return (0);
 		printf("OK start\n");
 	}
 	else if (ft_strcmp("##end", line) == 0)
 	{
-		if (li_start_end(line, lst, 2) == 0)
+		if (lst->name_end != NULL || li_start_end(line, lst, 2) == 0)
 			return (0);
 		printf("OK end\n");
 	}
