@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 12:06:03 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/16 15:21:31 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/17 17:22:42 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int			li_parse(char *line, t_lem *lst)
 		return (0);
 	while (get_next_line(0, &line) > 0)
 	{
-		// ft_putstrn(line);
+		//ft_putstrn(line);
 		if (line[0] == '#')
 			li_sharp(line, lst);
 		else if (li_room_tube(line, lst) == 0)
@@ -34,7 +34,7 @@ int			li_parse(char *line, t_lem *lst)
 	return (1);
 }
 
-int		main(void)
+int			main(void)
 {
 	char	*line;
 	t_lem	*lst;
@@ -42,5 +42,6 @@ int		main(void)
 	lst = li_lstnew(lst);
 	if (li_parse(line, lst) < 0)
 		li_error();
+	li_algo(lst, lst->end);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/13 12:00:31 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/15 17:04:53 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/17 10:41:37 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_lem		*li_lstadd(t_lem *lst, char *str)
 		{
 			new->next = NULL;
 			new->tube = NULL;
+			new->poids = INT_MAX;
 			new->name = ft_strdup(str);
 			if (lst->end == NULL)
 			{

@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/16 15:06:14 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/16 16:14:19 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/17 12:09:27 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** Reinscrit dans le nouveau tableau les pointeurs
 */
 
-t_salle		**li_realloc(t_salle **new, t_salle *r1)
+t_salle		**li_realloc(t_salle **new, t_salle *r1, t_salle *r2)
 {
 	int		i;
 
@@ -27,6 +27,8 @@ t_salle		**li_realloc(t_salle **new, t_salle *r1)
 		new[i] = r1->tube[i];
 		i++;
 	}
+	new[i] = r2;
+	new[++i] = NULL;
 	return (new);
 }
 
@@ -51,9 +53,7 @@ t_salle		**li_make_link(t_lem *lst, t_salle *r1, t_salle *r2)
 		while (r1->tube[i] != NULL)
 			i++;
 		new = malloc(sizeof(t_salle*) * (i + 2));
-		new[i] = r2;
-		new[++i] = NULL;
-		new = li_realloc(new, r1);
+		new = li_realloc(new, r1, r2);
 		return (new);
 	}
 	return (r1->tube);
