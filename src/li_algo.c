@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/16 16:15:42 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/17 17:27:27 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/18 14:35:42 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,22 +65,30 @@ int		li_recursive(t_lem *lst, t_salle *elem, int deep, int weight)
 	printf("elem->name : %s\t", elem->name);
 	printf("elem->poids : %d\n", elem->poids);
 	if (deep < 0)
+	{
+		printf("deep done\n");
 		return (1);
+	}
 	while (elem != lst->start)
 	{
 		while (elem->tube[i])
 		{
 			if (elem->tube[i]->poids == INT_MAX)
+			{
 				elem->tube[i]->poids = weight;
-
+				printf("elem->name : %s\t", elem->tube[i]->name);
+				printf("elem->poids : %d\n", elem->tube[i]->poids);
+			}
 			i++;
 		}
 		loop++;
 		if (loop < i)
-			return (li_recursive(lst, elem->tube[loop], deep - 1, weight));
+			return (li_recursive(lst, elem->tube[loop], deep, weight + 1));
 		i = 0;
+		if (elem != lst->start)
+			return (1);
 	}
-	return (0);
+	return (1);
 }
 
 int		li_algo(t_lem *lst, t_salle *elem)
@@ -91,10 +99,10 @@ int		li_algo(t_lem *lst, t_salle *elem)
 	int	i;
 
 	i = 0;
-	deep = 0;
-	weigth = 0;
+	deep = 2;
+	weigth = 2;
 	ret = 1;
-	while (elem->tube[i] && ret > 0)
+	while (elem->tube[i] != NULL && ret > 0)
 	{
 		ret = li_recursive(lst, elem->tube[i], deep, weigth);
 		i++;
