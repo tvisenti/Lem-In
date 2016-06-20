@@ -4,7 +4,7 @@ Lem-In - 42 - Project 07
 #### Objectifs
 
 Le but du projet est de trouver le moyen le plus rapide de faire traverser la fourmilière
-par n fourmis.
+par n fourmis.\n
 • Évidemment, il y a quelques contraintes. Pour arriver le premier, il faut prendre le
 chemin le plus court (et pas forcément pour autant le plus simple), ne pas marcher
 sur ses congénères, tout en évitant les embouteillages.
