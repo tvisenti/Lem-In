@@ -6,88 +6,49 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/16 16:15:42 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/18 14:35:42 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/20 14:44:19 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/lem_in.h"
 #include "../libft/inc/libft.h"
 
-// t_salle	**li_realloc_f(t_lem *lst, t_salle **file, t_salle *elem)
-// {
-// 	int	i;
-//
-// 	i = 0;
-// 	printf("SECOND\n");
-// 	while (elem->tube[i])
-// 		i++;
-// 	file = malloc(sizeof(t_salle*) * i + 1);
-// 	file[i++] = NULL;
-// 	i = -1;
-// 	while (elem->tube[++i])
-// 		file[i] = elem->tube[i];
-// 	return (file);
-// }
-//
-// t_salle	**li_malloc_f(t_lem *lst, t_salle **file, t_salle *elem)
-// {
-// 	int	i;
-//
-// 	i = 0;
-// 	printf("FIRST\n");
-// 	printf("name of end : %s\n", elem->name);
-// 	if (lst->end->tube[i] == NULL)
-// 		return (NULL);
-// 	while (elem->tube[i])
-// 	{
-// 		printf("name : %s\n", elem->tube[i]->name);
-// 		i++;
-// 	}
-// 	printf("i = %d\n", i);
-// 	file = malloc(sizeof(t_salle*) * i);
-// 	file[i++] = NULL;
-// 	i = -1;
-// 	while (elem->tube[++i] != NULL)
-// 	{
-// 		file[i] = elem->tube[i];
-// 		// printf("REALLOC : %s\n", file[i]->tube[i]->name);
-// 	}
-// 	return (file);
-// }
+int		li_put_weight(t_lem *lst, t_salle *elem, int i, int weight)
+{
+	if (elem->tube[i]->poids == INT_MAX)
+	{
+		elem->tube[i]->poids = weight;
+		printf("2 elem->name[i] : %s\t", elem->tube[i]->name);
+		printf("elem->poids[i] : %d\n", elem->tube[i]->poids);
+		return (1);
+	}
+	return (0);
+}
 
 int		li_recursive(t_lem *lst, t_salle *elem, int deep, int weight)
 {
 	int		i;
-	int		loop;
+	int		ret;
 
 	i = 0;
-	loop = 0;
-	printf("elem->name : %s\t", elem->name);
-	printf("elem->poids : %d\n", elem->poids);
-	if (deep < 0)
+	printf("elem->name : %s\n", elem->name);
+	if (elem == lst->start)
 	{
-		printf("deep done\n");
+		printf("FIN elem == lst->start\n");
 		return (1);
 	}
-	while (elem != lst->start)
+	if (deep == 0)
 	{
-		while (elem->tube[i])
-		{
-			if (elem->tube[i]->poids == INT_MAX)
-			{
-				elem->tube[i]->poids = weight;
-				printf("elem->name : %s\t", elem->tube[i]->name);
-				printf("elem->poids : %d\n", elem->tube[i]->poids);
-			}
-			i++;
-		}
-		loop++;
-		if (loop < i)
-			return (li_recursive(lst, elem->tube[loop], deep, weight + 1));
-		i = 0;
-		if (elem != lst->start)
-			return (1);
+		printf("FIN deep == 0\n");
+		return (li_put_weight(lst, elem, i, weight));
 	}
+	while (elem != lst->start && elem->tube[i] != NULL)
+	{
+		printf("LOOP\n");
+			ret = li_recursive(lst, elem->tube[i], deep - 1, weight);
+			i++;
+	}
+	printf("Je suis sur le start !!!!\n");
 	return (1);
 }
 
@@ -99,12 +60,15 @@ int		li_algo(t_lem *lst, t_salle *elem)
 	int	i;
 
 	i = 0;
-	deep = 2;
-	weigth = 2;
+	deep = 0;
+	weigth = 0;
 	ret = 1;
+	printf("end->name : %s\n", elem->name);
+	elem->poids = 0;
 	while (elem->tube[i] != NULL && ret > 0)
 	{
-		ret = li_recursive(lst, elem->tube[i], deep, weigth);
+		printf("FIRST TOUR\n");
+		ret = li_recursive(lst, elem->tube[i], deep + 1, weigth + 1);
 		i++;
 	}
 

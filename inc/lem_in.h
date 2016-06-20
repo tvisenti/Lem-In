@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 12:06:51 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/17 17:22:28 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/20 14:36:02 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int					li_parse(char *line, t_lem *lst);
 // t_salle				**li_malloc_f(t_lem *lst, t_salle **file, t_salle *elem);
 int					li_recursive(t_lem *lst, t_salle *elem, int deep,
 	int weight);
+int					li_put_weight(t_lem *lst, t_salle *elem, int i, int weight);
 int					li_algo(t_lem *lst, t_salle *elem);
 
 
