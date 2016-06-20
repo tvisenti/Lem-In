@@ -11,8 +11,8 @@ sur ses congénères, tout en évitant les embouteillages.
 • Au début du jeu, toutes les fourmis sont sur la salle indiquée par la commande
 (##)start. Le but est de les amener sur la salle indiquée par la commande (##)end en
 prenant le moins de tours possible. Chaque salle peut contenir une seule fourmi à
-la fois (sauf ##start et ##end qui peuvent en contenir autant qu’il faut).
-• On considère que les fourmis sont toutes dans la salle ##start au démarrage
+la fois (sauf (##)start et (##)end qui peuvent en contenir autant qu’il faut).
+• On considère que les fourmis sont toutes dans la salle (##)start au démarrage
 • Vous n’afficherez à chaque tour que les fourmis qui ont bougé
 • À chaque tour vous pouvez déplacer chaque fourmi une seule fois et ce suivant un
 tube (la salle réceptrice doit être libre).
