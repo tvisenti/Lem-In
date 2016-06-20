@@ -6,71 +6,81 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/16 16:15:42 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/20 14:44:19 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/20 21:00:03 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/lem_in.h"
 #include "../libft/inc/libft.h"
 
-int		li_put_weight(t_lem *lst, t_salle *elem, int i, int weight)
+int		li_put_weight(t_salle *elem, int weight)
 {
-	if (elem->tube[i]->poids == INT_MAX)
-	{
-		elem->tube[i]->poids = weight;
-		printf("2 elem->name[i] : %s\t", elem->tube[i]->name);
-		printf("elem->poids[i] : %d\n", elem->tube[i]->poids);
-		return (1);
-	}
+	elem->poids = weight;
+	printf("2 elem->name[i] : %s\t", elem->name);
+	printf("elem->poids[i] : %d\n", elem->poids);
 	return (0);
 }
+
+int		li_return_path(int ret, int u)
+{
+	if (u == -1)
+	{
+		printf("-----------\n");
+		return (-1);
+	}
+	if (ret == 1)
+	{
+		printf("11111\n");
+		return (1);
+	}
+	printf("000000\n");
+	return (0);
+}
+
+// check si la salle est deja faite dans la recursive, ajout d'un int dans le .h
 
 int		li_recursive(t_lem *lst, t_salle *elem, int deep, int weight)
 {
 	int		i;
+	int		u;
 	int		ret;
 
 	i = 0;
+	ret = 0;
+	u = -1;
 	printf("elem->name : %s\n", elem->name);
+	printf("elem->poids : %d\n", elem->poids);
+	if (elem->poids != INT_MAX && deep == 0)
+		return (-1);
 	if (elem == lst->start)
-	{
-		printf("FIN elem == lst->start\n");
 		return (1);
-	}
-	if (deep == 0)
-	{
-		printf("FIN deep == 0\n");
-		return (li_put_weight(lst, elem, i, weight));
-	}
-	while (elem != lst->start && elem->tube[i] != NULL)
+	if (elem->poids == INT_MAX)
+		return (li_put_weight(elem, weight));
+	while (elem->tube[i] != NULL && ret != 1)
 	{
 		printf("LOOP\n");
 			ret = li_recursive(lst, elem->tube[i], deep - 1, weight);
-			i++;
+			if (u == -1)
+				u = ret;
+		i++;
 	}
-	printf("Je suis sur le start !!!!\n");
-	return (1);
+	printf("NON PAS LA\n");
+	return (li_return_path(ret, u));
 }
 
 int		li_algo(t_lem *lst, t_salle *elem)
 {
 	int	deep;
-	int	weigth;
 	int	ret;
 	int	i;
 
-	i = 0;
-	deep = 0;
-	weigth = 0;
+	deep = 1;
 	ret = 1;
-	printf("end->name : %s\n", elem->name);
 	elem->poids = 0;
-	while (elem->tube[i] != NULL && ret > 0)
-	{
-		printf("FIRST TOUR\n");
-		ret = li_recursive(lst, elem->tube[i], deep + 1, weigth + 1);
-		i++;
-	}
-
-	return (0);
+	printf("end->name : %s\n", elem->name);
+	while (!(ret = li_recursive(lst, elem, deep, deep)))
+		deep++;
+	if (ret == -1)
+		return (0);
+	return (1);
 }
