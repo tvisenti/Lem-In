@@ -1,4 +1,4 @@
-# Lem-In - 42 - Project 07
+# Lem-in - 42 - Project 07
 
 #### Objectifs
 
