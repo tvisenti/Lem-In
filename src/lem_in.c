@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 12:06:03 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/21 13:23:14 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/21 14:36:04 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,7 @@ int			main(void)
 		li_error();
 	if (li_algo(lst, lst->end) == 1)
 		li_solve(lst);
+	else
+		ft_printf("Wrong path\n");
 	return (0);
 }

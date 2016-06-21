@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/16 16:15:42 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/21 13:25:51 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/21 14:37:43 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,13 @@ int		li_recursive(t_lem *lst, t_salle *elem, int deep, int weight)
 		return (li_put_weight(elem, weight));
 	while (elem->tube[i] != NULL && ret != 1)
 	{
-		ret = li_recursive(lst, elem->tube[i], deep - 1, weight);
-		if (u == -1)
-			u = ret;
+		// if (lst->prev != elem->tube[i])
+		// {
+		// 	lst->prev = elem->tube[i];
+			ret = li_recursive(lst, elem->tube[i], deep - 1, weight);
+			if (u == -1)
+				u = ret;
+		// }
 		i++;
 	}
 	return (li_return_path(ret, u));

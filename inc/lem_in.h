@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 12:06:51 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/21 13:24:26 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/21 14:17:35 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct		s_salle
 {
 	int				poids;
 	int				ants;
+	int				number;
 	char			*name;
 	struct s_salle	*next;
 	struct s_salle	**tube;
@@ -39,6 +40,7 @@ typedef struct		s_lem
 	char			*name_end;
 	struct s_salle	*start;
 	struct s_salle	*end;
+	struct s_salle	*prev;
 }					t_lem;
 
 /*

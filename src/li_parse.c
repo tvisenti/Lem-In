@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 09:39:27 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/21 13:24:14 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/21 14:35:26 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,12 @@ int			li_get_start_end(char *line, t_lem *lst, int start)
 
 int			li_sharp(char *line, t_lem *lst)
 {
-	if (ft_strcmp("##start", line) == 0)
+	if (ft_strcmp("##start", line) == 0 && ft_strlen(line) != 7)
 	{
 		if (lst->name_start != NULL || li_get_start_end(line, lst, 1) == 0)
 			return (0);
 	}
-	else if (ft_strcmp("##end", line) == 0)
+	else if (ft_strcmp("##end", line) == 0 && ft_strlen(line) != 5)
 	{
 		if (lst->name_end != NULL || li_get_start_end(line, lst, 2) == 0)
 			return (0);

@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 09:37:21 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/21 13:22:57 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/21 14:17:53 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_lem	*li_lstnew(void)
 		new->name_end = NULL;
 		new->start = NULL;
 		new->end = NULL;
+		new->prev = NULL;
 	}
 	return (new);
 }
