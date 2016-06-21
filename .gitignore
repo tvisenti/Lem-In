@@ -31,6 +31,6 @@
 # Debug files
 *.dSYM/
 map
-.swp
+*.swp
 .nfs*
-.map.swp
+.map.*
