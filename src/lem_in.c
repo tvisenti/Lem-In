@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 12:06:03 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/18 11:59:26 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/21 10:52:05 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int			main(void)
 	lst = li_lstnew(lst);
 	if (li_parse(line, lst) < 0)
 		li_error();
-	li_algo(lst, lst->end);
+	if (li_algo(lst, lst->end) == 1)
+		li_solve(lst);
 	return (0);
 }

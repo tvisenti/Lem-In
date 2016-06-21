@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 12:06:51 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/20 20:48:17 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/21 11:21:08 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,11 @@ int					li_put_weight(t_salle *elem, int weight);
 int					li_return_path(int ret, int u);
 int					li_algo(t_lem *lst, t_salle *elem);
 
+/*
+** li_solve.c
+*/
+
+t_salle				*li_find_room(t_lem *lst, t_salle *elem);
+int					li_solve(t_lem *lst);
 
 #endif
