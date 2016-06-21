@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 12:06:51 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/21 11:21:08 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/21 13:24:26 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,15 @@
 # include <stdlib.h>
 # include <stdio.h>
 
+# include "../libft/inc/libft.h"
+# include "../libft/inc/ft_printf.h"
+
 # define INT_MAX 2147483647
 
 typedef struct		s_salle
 {
 	int				poids;
+	int				ants;
 	char			*name;
 	struct s_salle	*next;
 	struct s_salle	**tube;
@@ -35,7 +39,6 @@ typedef struct		s_lem
 	char			*name_end;
 	struct s_salle	*start;
 	struct s_salle	*end;
-	struct s_salle	**file;
 }					t_lem;
 
 /*
@@ -44,7 +47,7 @@ typedef struct		s_lem
 
 void				li_error(void);
 t_lem				*li_lstadd(t_lem *lst, char *str);
-t_lem				*li_lstnew(t_lem *lst);
+t_lem				*li_lstnew(void);
 int					ft_strnlen(char *str, char c);
 
 /*
@@ -52,7 +55,7 @@ int					ft_strnlen(char *str, char c);
 */
 
 t_salle				**li_realloc(t_salle **new, t_salle *r1, t_salle *r2);
-t_salle				**li_make_link(t_lem *lst, t_salle *r1, t_salle *r2);
+t_salle				**li_make_link(t_salle *r1, t_salle *r2);
 t_salle				*li_find_elem(t_lem *lst, t_salle *elem, char *str);
 int					li_room_tube(char *line, t_lem *lst);
 int					li_is_exist(char *str, t_lem *lst);
@@ -61,7 +64,7 @@ int					li_is_exist(char *str, t_lem *lst);
 ** li_make_link.c
 */
 
-int					li_check_coord(char *str, char **tab, t_lem *lst);
+int					li_check_coord(char **tab, t_lem *lst);
 int					li_get_start_end(char *line, t_lem *lst, int start);
 int					li_sharp(char *line, t_lem *lst);
 int					li_get_ants(char *line, t_lem *lst);
@@ -71,8 +74,6 @@ int					li_parse(char *line, t_lem *lst);
 ** li_algo.c
 */
 
-// t_salle				**li_realloc_f(t_lem *lst, t_salle **file, t_salle *elem);
-// t_salle				**li_malloc_f(t_lem *lst, t_salle **file, t_salle *elem);
 int					li_recursive(t_lem *lst, t_salle *elem, int deep,
 	int weight);
 int					li_put_weight(t_salle *elem, int weight);

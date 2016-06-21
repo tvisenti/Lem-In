@@ -6,13 +6,13 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 09:37:21 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/17 12:03:29 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/21 13:22:57 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/lem_in.h"
 
-t_lem	*li_lstnew(t_lem *lst)
+t_lem	*li_lstnew(void)
 {
 	t_lem	*new;
 
@@ -26,7 +26,6 @@ t_lem	*li_lstnew(t_lem *lst)
 		new->name_end = NULL;
 		new->start = NULL;
 		new->end = NULL;
-		new->file = NULL;
 	}
 	return (new);
 }

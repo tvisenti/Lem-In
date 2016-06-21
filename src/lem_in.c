@@ -6,13 +6,11 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 12:06:03 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/21 10:52:05 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/21 13:23:14 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/lem_in.h"
-#include "../libft/inc/libft.h"
-#include <stdio.h>
 
 /*
 ** Debut du parseur de fichier
@@ -25,7 +23,7 @@ int			li_parse(char *line, t_lem *lst)
 		return (0);
 	while (get_next_line(0, &line) > 0)
 	{
-		//ft_putstrn(line);
+		ft_printf("%s\n", line);
 		if (line[0] == '#')
 			li_sharp(line, lst);
 		else if (li_room_tube(line, lst) == 0)
@@ -39,7 +37,8 @@ int			main(void)
 	char	*line;
 	t_lem	*lst;
 
-	lst = li_lstnew(lst);
+	line = NULL;
+	lst = li_lstnew();
 	if (li_parse(line, lst) < 0)
 		li_error();
 	if (li_algo(lst, lst->end) == 1)

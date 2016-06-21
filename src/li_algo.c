@@ -6,12 +6,11 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/16 16:15:42 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/21 11:25:44 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/21 13:25:51 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/lem_in.h"
-#include "../libft/inc/libft.h"
 
 int		li_put_weight(t_salle *elem, int weight)
 {
@@ -30,8 +29,8 @@ int		li_return_path(int ret, int u)
 
 /*
 ** Check si la salle est deja faite dans la recursive, ajout d'un int dans le .h
-**
 */
+
 int		li_recursive(t_lem *lst, t_salle *elem, int deep, int weight)
 {
 	int		i;
@@ -61,7 +60,6 @@ int		li_algo(t_lem *lst, t_salle *elem)
 {
 	int	deep;
 	int	ret;
-	int	i;
 
 	deep = 1;
 	ret = 1;

@@ -6,12 +6,11 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 09:39:27 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/18 11:58:37 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/21 13:24:14 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/lem_in.h"
-#include "../libft/inc/libft.h"
 
 /*
 ** Check si le maillon existe deja
@@ -41,7 +40,7 @@ int			li_is_exist(char *str, t_lem *lst)
 ** Verifie la coordonnée si elle est correcte
 */
 
-int			li_check_coord(char *str, char **tab, t_lem *lst)
+int			li_check_coord(char **tab, t_lem *lst)
 {
 	int		i;
 	int		x;
@@ -68,7 +67,7 @@ int			li_get_start_end(char *line, t_lem *lst, int start)
 
 	i = 0;
 	get_next_line(0, &line);
-	// ft_putstrn(line);
+	ft_printf("%s\n", line);
 	if (line[0] == 'L' || line[0] == '#')
 		return (0);
 	tab = ft_strsplit(line, ' ');
@@ -76,7 +75,7 @@ int			li_get_start_end(char *line, t_lem *lst, int start)
 		lst->name_start = ft_strdup(tab[0]);
 	else if (start == 2)
 		lst->name_end = ft_strdup(tab[0]);
-	if (li_check_coord(line, tab, lst) == 0 || tab[3] != NULL)
+	if (li_check_coord(tab, lst) == 0 || tab[3] != NULL)
 	{
 		free(tab);
 		return (0);
@@ -113,7 +112,7 @@ int			li_get_ants(char *line, t_lem *lst)
 	int		nb;
 
 	get_next_line(0, &line);
-	// ft_putstrn(line);
+	ft_printf("%s\n", line);
 	nb = ft_atoi(line);
 	if (nb == -0 || nb < 0)
 		return (0);

@@ -6,12 +6,11 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/16 15:06:14 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/18 11:59:16 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/21 13:24:47 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/lem_in.h"
-#include "../libft/inc/libft.h"
 
 /*
 ** Reinscrit dans le nouveau tableau les pointeurs
@@ -36,7 +35,7 @@ t_salle		**li_realloc(t_salle **new, t_salle *r1, t_salle *r2)
 ** Creer un pointeur sur tube A -> B
 */
 
-t_salle		**li_make_link(t_lem *lst, t_salle *r1, t_salle *r2)
+t_salle		**li_make_link(t_salle *r1, t_salle *r2)
 {
 	int		i;
 	t_salle	**new;
@@ -89,8 +88,8 @@ int			li_find_make_link(t_lem *lst, t_salle *r1, t_salle *r2, char **tab)
 	if (!r1 || !r2)
 		return (0);
 	lst->begin_tube = 1;
-	r1->tube = li_make_link(lst, r1, r2);
-	r2->tube = li_make_link(lst, r2, r1);
+	r1->tube = li_make_link(r1, r2);
+	r2->tube = li_make_link(r2, r1);
 	return (1);
 }
 
@@ -104,6 +103,8 @@ int			li_room_tube(char *line, t_lem *lst)
 	t_salle	*r1;
 	t_salle	*r2;
 
+	r1 = NULL;
+	r2 = NULL;
 	if (ft_strnlen(line, '-') > 0)
 	{
 		tab = ft_strsplit(line, '-');
@@ -114,7 +115,7 @@ int			li_room_tube(char *line, t_lem *lst)
 		tab = ft_strsplit(line, ' ');
 		if (tab[3] != NULL)
 			return (0);
-		li_check_coord(line, tab, lst);
+		li_check_coord(tab, lst);
 		free(tab);
 		return (1);
 	}
