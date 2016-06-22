@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 12:06:51 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/21 14:17:35 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/22 19:41:51 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
 
 # include "../libft/inc/libft.h"
 # include "../libft/inc/ft_printf.h"
@@ -35,19 +34,18 @@ typedef struct		s_salle
 typedef struct		s_lem
 {
 	int				ants;
+	int				error;
 	int				begin_tube;
 	char			*name_start;
 	char			*name_end;
 	struct s_salle	*start;
 	struct s_salle	*end;
-	struct s_salle	*prev;
 }					t_lem;
 
 /*
 ** Les fonctions de la librairie
 */
 
-void				li_error(void);
 t_lem				*li_lstadd(t_lem *lst, char *str);
 t_lem				*li_lstnew(void);
 int					ft_strnlen(char *str, char c);
@@ -81,12 +79,13 @@ int					li_recursive(t_lem *lst, t_salle *elem, int deep,
 int					li_put_weight(t_salle *elem, int weight);
 int					li_return_path(int ret, int u);
 int					li_algo(t_lem *lst, t_salle *elem);
+void				li_replace_start_end(t_lem *lst);
 
 /*
 ** li_solve.c
 */
 
-t_salle				*li_find_room(t_lem *lst, t_salle *elem);
+t_salle				*li_find_room(t_salle *elem);
 int					li_solve(t_lem *lst);
 
 #endif

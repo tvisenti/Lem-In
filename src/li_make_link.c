@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/16 15:06:14 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/21 13:24:47 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/22 20:11:07 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,10 @@ t_salle		**li_make_link(t_salle *r1, t_salle *r2)
 t_salle		*li_find_elem(t_lem *lst, t_salle *elem, char *str)
 {
 	elem = lst->start;
+	printf("first\n");
 	while (elem)
 	{
+		printf("elem : %s\n", elem->name);
 		if (ft_strcmp(elem->name, str) == 0)
 			return (elem);
 		elem = elem->next;
@@ -80,10 +82,17 @@ t_salle		*li_find_elem(t_lem *lst, t_salle *elem, char *str)
 
 int			li_find_make_link(t_lem *lst, t_salle *r1, t_salle *r2, char **tab)
 {
+	int		i;
+	t_salle	*end;
+
+	i = 0;
+	end = lst->end;
 	if (tab[2] != NULL)
 		return (0);
 	r1 = li_find_elem(lst, r1, tab[0]);
 	r2 = li_find_elem(lst, r2, tab[1]);
+	printf("r1 : %s\n", r1->name);
+	printf("r2 : %s\n", r2->name);
 	free(tab);
 	if (!r1 || !r2)
 		return (0);
@@ -105,6 +114,13 @@ int			li_room_tube(char *line, t_lem *lst)
 
 	r1 = NULL;
 	r2 = NULL;
+	if (lst->error == 1)
+		return (0);
+	if (ft_strcmp(lst->end->name, lst->name_end) == 0)
+	{
+		// gros probleme ici
+		li_replace_start_end(lst);
+	}
 	if (ft_strnlen(line, '-') > 0)
 	{
 		tab = ft_strsplit(line, '-');

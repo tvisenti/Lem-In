@@ -6,11 +6,29 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/16 16:15:42 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/21 14:37:43 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/22 20:09:22 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/lem_in.h"
+
+void		li_replace_start_end(t_lem *lst)
+{
+	t_salle *end;
+	t_salle	*tmp;
+
+	end = lst->start;
+	tmp = lst->start;
+	while (ft_strcmp(end->name, lst->name_end) != 0)
+		end = end->next;
+	while (tmp->next != end)
+		tmp = tmp->next;
+	tmp->next = end->next;
+	end->next = NULL;
+	lst->end->next = end;
+	end = lst->end;
+	printf("end : %s\n", end->name);
+}
 
 int		li_put_weight(t_salle *elem, int weight)
 {
@@ -48,13 +66,9 @@ int		li_recursive(t_lem *lst, t_salle *elem, int deep, int weight)
 		return (li_put_weight(elem, weight));
 	while (elem->tube[i] != NULL && ret != 1)
 	{
-		// if (lst->prev != elem->tube[i])
-		// {
-		// 	lst->prev = elem->tube[i];
-			ret = li_recursive(lst, elem->tube[i], deep - 1, weight);
-			if (u == -1)
-				u = ret;
-		// }
+		ret = li_recursive(lst, elem->tube[i], deep - 1, weight);
+		if (u == -1)
+			u = ret;
 		i++;
 	}
 	return (li_return_path(ret, u));
@@ -65,6 +79,7 @@ int		li_algo(t_lem *lst, t_salle *elem)
 	int	deep;
 	int	ret;
 
+	if (elem->tube[0] == NULL)
 	deep = 1;
 	ret = 1;
 	elem->poids = 0;

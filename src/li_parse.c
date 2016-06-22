@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 09:39:27 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/21 14:35:26 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/22 19:15:48 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ int			li_check_coord(char **tab, t_lem *lst)
 		return (0);
 	x = ft_atoi(tab[++i]);
 	y = ft_atoi(tab[++i]);
-	if (x == -0 || y == -0)
-		return (0);
+	if (x < 0 || y < 0)
+		lst->error = 1;
 	return (1);
 }
 
@@ -90,15 +90,21 @@ int			li_get_start_end(char *line, t_lem *lst, int start)
 
 int			li_sharp(char *line, t_lem *lst)
 {
-	if (ft_strcmp("##start", line) == 0 && ft_strlen(line) != 7)
+	if (ft_strcmp("##start", line) == 0 && ft_strlen(line) == 7)
 	{
 		if (lst->name_start != NULL || li_get_start_end(line, lst, 1) == 0)
+		{
+			lst->error = 1;
 			return (0);
+		}
 	}
-	else if (ft_strcmp("##end", line) == 0 && ft_strlen(line) != 5)
+	else if (ft_strcmp("##end", line) == 0 && ft_strlen(line) == 5)
 	{
 		if (lst->name_end != NULL || li_get_start_end(line, lst, 2) == 0)
+		{
+			lst->error = 1;
 			return (0);
+		}
 	}
 	return (1);
 }
@@ -114,8 +120,11 @@ int			li_get_ants(char *line, t_lem *lst)
 	get_next_line(0, &line);
 	ft_printf("%s\n", line);
 	nb = ft_atoi(line);
-	if (nb == -0 || nb < 0)
+	if (nb < 0)
+	{
+		lst->error = 1;
 		return (0);
+	}
 	lst->ants = nb;
 	return (1);
 }

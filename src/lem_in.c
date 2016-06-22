@@ -5,23 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/08 12:06:03 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/21 14:36:04 by tvisenti         ###   ########.fr       */
+/*   Created: 2016/06/22 15:26:51 by tvisenti          #+#    #+#             */
+/*   Updated: 2016/06/22 19:41:24 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../inc/lem_in.h"
 
 /*
 ** Debut du parseur de fichier
-** Voir la gestion d'erreur, pas sur pour le return (0)
 */
 
 int			li_parse(char *line, t_lem *lst)
 {
-	if (li_get_ants(line, lst) == 0)
-		return (0);
-	while (get_next_line(0, &line) > 0)
+	li_get_ants(line, lst);
+	while (get_next_line(0, &line) > 0 && lst->error == 0)
 	{
 		ft_printf("%s\n", line);
 		if (line[0] == '#')
@@ -29,6 +28,10 @@ int			li_parse(char *line, t_lem *lst)
 		else if (li_room_tube(line, lst) == 0)
 			return (0);
 	}
+	if (lst->error == 1)
+		ft_printf("%s\n", line);
+	while (lst->error == 1 && get_next_line(0, &line) > 0)
+		ft_printf("%s\n", line);
 	return (1);
 }
 
@@ -39,11 +42,14 @@ int			main(void)
 
 	line = NULL;
 	lst = li_lstnew();
-	if (li_parse(line, lst) < 0)
-		li_error();
-	if (li_algo(lst, lst->end) == 1)
+	if (li_parse(line, lst) == 0)
+		printf("\nMerci de mettre un chemin valide.\n");
+	if (lst->error == 0 && li_algo(lst, lst->end) == 1)
+	{
+		ft_printf("\n");
 		li_solve(lst);
+	}
 	else
-		ft_printf("Wrong path\n");
+		ft_printf("\nLes tubes ne relient pas start a end.\n");
 	return (0);
 }
