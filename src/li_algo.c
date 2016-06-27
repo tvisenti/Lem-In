@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/16 16:15:42 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/22 20:09:22 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/27 16:42:47 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,16 @@
 void		li_replace_start_end(t_lem *lst)
 {
 	t_salle *end;
-	t_salle	*tmp;
+	t_salle *start;
 
 	end = lst->start;
-	tmp = lst->start;
+	start = lst->start;
+	while (ft_strcmp(start->name, lst->name_start) != 0)
+		start = start->next;
+	lst->start = start;
 	while (ft_strcmp(end->name, lst->name_end) != 0)
 		end = end->next;
-	while (tmp->next != end)
-		tmp = tmp->next;
-	tmp->next = end->next;
-	end->next = NULL;
-	lst->end->next = end;
-	end = lst->end;
-	printf("end : %s\n", end->name);
+	lst->end = end;
 }
 
 int		li_put_weight(t_salle *elem, int weight)
@@ -79,7 +76,8 @@ int		li_algo(t_lem *lst, t_salle *elem)
 	int	deep;
 	int	ret;
 
-	if (elem->tube[0] == NULL)
+	if (lst->error == 1 || elem->tube == NULL)
+		return (0);
 	deep = 1;
 	ret = 1;
 	elem->poids = 0;

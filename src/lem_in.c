@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/22 15:26:51 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/22 19:41:24 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/27 15:56:21 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,14 @@ int			li_parse(char *line, t_lem *lst)
 		if (line[0] == '#')
 			li_sharp(line, lst);
 		else if (li_room_tube(line, lst) == 0)
-			return (0);
+			lst->error = 1;
 	}
 	if (lst->error == 1)
 		ft_printf("%s\n", line);
 	while (lst->error == 1 && get_next_line(0, &line) > 0)
 		ft_printf("%s\n", line);
+	if (lst->tube == 0)
+		lst->error = 1;
 	return (1);
 }
 
@@ -42,14 +44,19 @@ int			main(void)
 
 	line = NULL;
 	lst = li_lstnew();
-	if (li_parse(line, lst) == 0)
-		printf("\nMerci de mettre un chemin valide.\n");
+	if (li_parse(line, lst) == 0 || lst->start_end != 2)
+	{
+		ft_printf("\nMerci de mettre un chemin valide.\n");
+		return (0);
+	}
 	if (lst->error == 0 && li_algo(lst, lst->end) == 1)
 	{
 		ft_printf("\n");
 		li_solve(lst);
 	}
+	else if (lst->error == 1 && lst->ants <= 0)
+		ft_printf("\nLes fourmis sont parties dans une autre fourmilière.\n");
 	else
-		ft_printf("\nLes tubes ne relient pas start a end.\n");
+		ft_printf("\nLes tubes ne relient pas start à end / aucune salle.\n");
 	return (0);
 }

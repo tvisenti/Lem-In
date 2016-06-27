@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 09:39:27 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/22 19:15:48 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/27 12:25:32 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ int			li_is_exist(char *str, t_lem *lst)
 	while (tmp != NULL)
 	{
 		if (ft_strcmp(tmp->name, str) == 0)
+		{
+			lst->error = 1;
 			return (0);
+		}
 		tmp = tmp->next;
 	}
 	lst = li_lstadd(lst, str);
@@ -37,7 +40,7 @@ int			li_is_exist(char *str, t_lem *lst)
 }
 
 /*
-** Verifie la coordonnée si elle est correcte
+** Verifie si la coordonnée est correcte
 */
 
 int			li_check_coord(char **tab, t_lem *lst)
@@ -57,7 +60,7 @@ int			li_check_coord(char **tab, t_lem *lst)
 }
 
 /*
-** Sauvegarde le nom de l'entree et sortie de la fourmiliere
+** Sauvegarde le nom de l'entrée et sortie de la fourmiliere
 */
 
 int			li_get_start_end(char *line, t_lem *lst, int start)
@@ -97,6 +100,7 @@ int			li_sharp(char *line, t_lem *lst)
 			lst->error = 1;
 			return (0);
 		}
+		lst->start_end++;
 	}
 	else if (ft_strcmp("##end", line) == 0 && ft_strlen(line) == 5)
 	{
@@ -105,6 +109,7 @@ int			li_sharp(char *line, t_lem *lst)
 			lst->error = 1;
 			return (0);
 		}
+		lst->start_end++;
 	}
 	return (1);
 }
@@ -120,9 +125,10 @@ int			li_get_ants(char *line, t_lem *lst)
 	get_next_line(0, &line);
 	ft_printf("%s\n", line);
 	nb = ft_atoi(line);
-	if (nb < 0)
+	if (nb <= 0)
 	{
 		lst->error = 1;
+		lst->ants = nb;
 		return (0);
 	}
 	lst->ants = nb;

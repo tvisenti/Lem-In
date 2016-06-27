@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   li_lstnew.c                                        :+:      :+:    :+:   */
+/*   li_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/10 09:37:21 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/27 12:10:17 by tvisenti         ###   ########.fr       */
+/*   Created: 2016/06/27 15:28:51 by tvisenti          #+#    #+#             */
+/*   Updated: 2016/06/27 16:00:10 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/lem_in.h"
+#include "../libft/inc/libft.h"
 
-t_lem	*li_lstnew(void)
+int		li_strcmp(char *s1, char *s2)
 {
-	t_lem	*new;
+	int	i;
+	int	k;
 
-	if (!(new = (t_lem*)malloc(sizeof(t_lem))))
-		return (NULL);
-	if (new != NULL)
+	i = 0;
+	k = 0;
+	while (s1[i] != s2[k] && s1[i] && s2[k])
+		i++;
+	while (s1[i] == s2[k] && s1[i] && s2[k])
 	{
-		new->ants = 0;
-		new->error = 0;
-		new->tube = 0;
-		new->begin_tube = 0;
-		new->start_end = 0;
-		new->name_start = NULL;
-		new->name_end = NULL;
-		new->start = NULL;
-		new->end = NULL;
+		i++;
+		k++;
 	}
-	return (new);
+	if (k == ft_strlen(s2))
+		return (0);
+	return (1);
 }

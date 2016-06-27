@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 12:06:51 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/22 19:41:51 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/27 16:44:14 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct		s_lem
 {
 	int				ants;
 	int				error;
+	int				tube;
+	int				start_end;
 	int				begin_tube;
 	char			*name_start;
 	char			*name_end;
@@ -49,6 +51,7 @@ typedef struct		s_lem
 t_lem				*li_lstadd(t_lem *lst, char *str);
 t_lem				*li_lstnew(void);
 int					ft_strnlen(char *str, char c);
+int					li_strcmp(char *s1, char *s2);
 
 /*
 ** li_parse.c
@@ -69,6 +72,7 @@ int					li_get_start_end(char *line, t_lem *lst, int start);
 int					li_sharp(char *line, t_lem *lst);
 int					li_get_ants(char *line, t_lem *lst);
 int					li_parse(char *line, t_lem *lst);
+void				li_check_error(t_lem *lst, char *line);
 
 /*
 ** li_algo.c
@@ -86,6 +90,7 @@ void				li_replace_start_end(t_lem *lst);
 */
 
 t_salle				*li_find_room(t_salle *elem);
+int					li_try_solve(t_lem *lst, t_salle *elem);
 int					li_solve(t_lem *lst);
 
 #endif

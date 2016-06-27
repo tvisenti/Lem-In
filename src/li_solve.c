@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/21 10:52:32 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/22 16:34:02 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/27 16:44:54 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,15 @@ t_salle	*li_find_room(t_salle *elem)
 	int		i;
 	t_salle	*new;
 
-	i = 0;
-	new = elem;
-	if (elem->tube[i] != NULL)
+	i = 1;
+	if (elem->tube == NULL)
+		return (NULL);
+	new = elem->tube[0];
+	while (elem->tube[i] != NULL)
 	{
-		new = elem->tube[i];
+		if (new->poids > elem->tube[i]->poids)
+			new = elem->tube[i];
 		i++;
-		while (elem->tube[i] != NULL)
-		{
-			if (new->poids > elem->tube[i]->poids)
-				new = elem->tube[i];
-			i++;
-		}
 	}
 	return (new);
 }
