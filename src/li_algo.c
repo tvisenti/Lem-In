@@ -6,11 +6,15 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/16 16:15:42 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/27 17:58:26 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/28 10:13:06 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/lem_in.h"
+
+/*
+** Replace le start et le end par les bonnes salles
+*/
 
 void	li_replace_start_end(t_lem *lst)
 {
@@ -27,11 +31,21 @@ void	li_replace_start_end(t_lem *lst)
 	lst->end = end;
 }
 
+/*
+** Attribue le poids à la salle
+*/
+
 int		li_put_weight(t_salle *elem, int weight)
 {
 	elem->poids = weight;
 	return (0);
 }
+
+/*
+** u = -1 : salle déjà faite
+** ret = 1 : arrive à start
+** ret 0 : continue
+*/
 
 int		li_return_path(int ret, int u)
 {
@@ -43,7 +57,8 @@ int		li_return_path(int ret, int u)
 }
 
 /*
-** Check si la salle est deja faite dans la recursive, ajout d'un int dans le .h
+** Descends à la bonne profondeur, check si la salle est
+** déjà faite dans la recursive
 */
 
 int		li_recursive(t_lem *lst, t_salle *elem, int deep, int weight)
@@ -70,6 +85,11 @@ int		li_recursive(t_lem *lst, t_salle *elem, int deep, int weight)
 	}
 	return (li_return_path(ret, u));
 }
+
+/*
+** Boucle sur la recursive, envoi end a chaque tour et une
+** profondeur + poids supérieur
+*/
 
 int		li_algo(t_lem *lst, t_salle *elem)
 {

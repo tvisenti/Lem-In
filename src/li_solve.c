@@ -6,14 +6,14 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/21 10:52:32 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/28 10:03:55 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/28 10:16:26 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/lem_in.h"
 
 /*
-** 
+** Verifie si il y a qu'un end et un start et si ils sont à replacer
 */
 
 void		li_check_error(t_lem *lst, char *line)
@@ -24,6 +24,10 @@ void		li_check_error(t_lem *lst, char *line)
 	ft_strcmp(lst->start->name, lst->name_start)))
 		li_replace_start_end(lst);
 }
+
+/*
+** Renvoi à la prochaine salle
+*/
 
 t_salle		*li_find_room(t_salle *elem)
 {
@@ -42,6 +46,10 @@ t_salle		*li_find_room(t_salle *elem)
 	}
 	return (new);
 }
+
+/*
+** Boucle tant que les fourmis ne sont pas arrivées
+*/
 
 int			li_solve(t_lem *lst)
 {
