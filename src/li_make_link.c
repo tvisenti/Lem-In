@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/16 15:06:14 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/27 16:46:10 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/27 17:59:25 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,17 +96,6 @@ int			li_find_make_link(t_lem *lst, t_salle *r1, t_salle *r2, char **tab)
 	r1->tube = li_make_link(r1, r2);
 	r2->tube = li_make_link(r2, r1);
 	return (1);
-}
-
-void		li_check_error(t_lem *lst, char *line)
-{
-	if (lst->start_end != 2)
-		lst->error = 1;
-	if (lst->error == 0 && (ft_strcmp(lst->end->name, lst->name_end) != 0 ||
-	ft_strcmp(lst->start->name, lst->name_start)))
-	{
-		li_replace_start_end(lst);
-	}
 }
 
 /*

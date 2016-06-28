@@ -6,13 +6,13 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/16 16:15:42 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/27 16:42:47 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/27 17:58:26 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/lem_in.h"
 
-void		li_replace_start_end(t_lem *lst)
+void	li_replace_start_end(t_lem *lst)
 {
 	t_salle *end;
 	t_salle *start;

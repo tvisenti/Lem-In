@@ -6,13 +6,26 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/21 10:52:32 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/27 16:44:54 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/28 10:03:55 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/lem_in.h"
 
-t_salle	*li_find_room(t_salle *elem)
+/*
+** 
+*/
+
+void		li_check_error(t_lem *lst, char *line)
+{
+	if (lst->start_end != 2)
+		lst->error = 1;
+	if (lst->error == 0 && (ft_strcmp(lst->end->name, lst->name_end) != 0 ||
+	ft_strcmp(lst->start->name, lst->name_start)))
+		li_replace_start_end(lst);
+}
+
+t_salle		*li_find_room(t_salle *elem)
 {
 	int		i;
 	t_salle	*new;
@@ -30,7 +43,7 @@ t_salle	*li_find_room(t_salle *elem)
 	return (new);
 }
 
-int		li_solve(t_lem *lst)
+int			li_solve(t_lem *lst)
 {
 	int		i;
 	int		ants;
