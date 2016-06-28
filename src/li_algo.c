@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/16 16:15:42 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/28 10:13:06 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/28 12:19:38 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,31 @@
 
 void	li_replace_start_end(t_lem *lst)
 {
-	t_salle *end;
 	t_salle *start;
+	t_salle *end;
+	t_salle *tmp;
 
-	end = lst->start;
-	start = lst->start;
-	while (ft_strcmp(start->name, lst->name_start) != 0)
-		start = start->next;
-	lst->start = start;
-	while (ft_strcmp(end->name, lst->name_end) != 0)
-		end = end->next;
-	lst->end = end;
+	tmp = lst->start;
+	if (ft_strcmp(lst->start->name, lst->name_start) != 0)
+	{
+		while (ft_strcmp(tmp->next->name, lst->name_start) != 0)
+			tmp = tmp->next;
+		start = tmp->next;
+		tmp->next = start->next;
+		start->next = lst->start;
+		lst->start = start;
+		tmp = lst->start;
+	}
+	if (ft_strcmp(lst->end->name, lst->name_end) != 0)
+	{
+		while (ft_strcmp(tmp->next->name, lst->name_end) != 0)
+			tmp = tmp->next;
+		end = tmp->next;
+		tmp->next = end->next;
+		end->next = NULL;
+		lst->end->next = end;
+		lst->end = end;
+	}
 }
 
 /*

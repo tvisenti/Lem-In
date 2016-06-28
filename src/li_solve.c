@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/21 10:52:32 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/28 10:16:26 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/28 11:34:03 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		li_check_error(t_lem *lst, char *line)
 	if (lst->start_end != 2)
 		lst->error = 1;
 	if (lst->error == 0 && (ft_strcmp(lst->end->name, lst->name_end) != 0 ||
-	ft_strcmp(lst->start->name, lst->name_start)))
+	ft_strcmp(lst->start->name, lst->name_start) != 0))
 		li_replace_start_end(lst);
 }
 
