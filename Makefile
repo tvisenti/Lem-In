@@ -6,7 +6,7 @@
 #    By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/06/08 10:27:37 by tvisenti          #+#    #+#              #
-#    Updated: 2016/06/27 15:57:01 by tvisenti         ###   ########.fr        #
+#    Updated: 2016/06/29 13:07:10 by tvisenti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,11 +60,11 @@ $(NAME): $(OBJ) $(OBJLIB)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	@$(CC) -o $@ -c $<
+	@$(CC) $(FLAGS) -o $@ -c $<
 
 $(OBJLIB_PATH)/%.o: $(LIB_PATH)/%.c
 	@mkdir $(OBJLIB_PATH) 2> /dev/null || true
-	@$(CC) -o $@ -c $<
+	@$(CC) $(FLAGS) -o $@ -c $<
 
 clean:
 	@rm -rf $(OBJ) $(OBJLIB)

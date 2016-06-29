@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/16 15:06:14 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/28 12:21:39 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/29 13:10:44 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int			li_room_tube(char *line, t_lem *lst)
 	if (ft_strnlen(line, '-') > 0)
 	{
 		lst->tube = 1;
-		li_check_error(lst, line);
+		li_check_error(lst);
 		tab = ft_strsplit(line, '-');
 		return (li_find_make_link(lst, r1, r2, tab));
 	}

@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 12:06:51 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/28 13:24:49 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/29 13:16:45 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int					li_get_start_end(char *line, t_lem *lst, int start);
 int					li_sharp(char *line, t_lem *lst);
 int					li_get_ants(char *line, t_lem *lst);
 int					li_parse(char *line, t_lem *lst);
-void				li_check_error(t_lem *lst, char *line);
 
 /*
 ** li_algo.c
@@ -89,8 +88,9 @@ void				li_replace_start_end(t_lem *lst);
 ** li_solve.c
 */
 
+void				li_check_error(t_lem *lst);
 t_salle				*li_find_room(t_salle *elem);
-int					li_try_solve(t_lem *lst, t_salle *elem);
+t_salle				*li_affichage(t_salle *new, int ants, t_lem *lst);
 int					li_solve(t_lem *lst);
 
 #endif

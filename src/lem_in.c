@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/22 15:26:51 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/28 11:35:44 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/29 13:03:04 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,7 @@ int			main(void)
 		return (0);
 	}
 	if (lst->error == 0 && li_algo(lst, lst->end) == 1)
-	{
-		ft_printf("\n");
 		li_solve(lst);
-	}
 	else if (lst->error == 1 && lst->ants <= 0)
 		ft_printf("\nLes fourmis sont parties dans une autre fourmilière.\n");
 	else
