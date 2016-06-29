@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 12:06:51 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/29 13:16:45 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/29 14:54:13 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ typedef struct		s_lem
 t_lem				*li_lstadd(t_lem *lst, char *str);
 t_lem				*li_lstnew(void);
 int					ft_strnlen(char *str, char c);
+int					li_free_tab(char **tab);
+int					li_free_salle(t_lem *lst);
+int					li_free_lst(t_lem *lst);
 
 /*
 ** li_parse.c

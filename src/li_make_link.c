@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/16 15:06:14 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/29 13:10:44 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/29 15:00:02 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_salle		**li_make_link(t_salle *r1, t_salle *r2)
 			i++;
 		new = malloc(sizeof(t_salle*) * (i + 2));
 		new = li_realloc(new, r1, r2);
+		free(r1->tube);
 		return (new);
 	}
 	return (r1->tube);
@@ -86,10 +87,10 @@ int			li_find_make_link(t_lem *lst, t_salle *r1, t_salle *r2, char **tab)
 	i = 0;
 	end = lst->end;
 	if (tab[2] != NULL)
-		return (0);
+		return (li_free_tab(tab));
 	r1 = li_find_elem(lst, r1, tab[0]);
 	r2 = li_find_elem(lst, r2, tab[1]);
-	free(tab);
+	li_free_tab(tab);
 	if (!r1 || !r2)
 		return (0);
 	lst->begin_tube = 1;
@@ -123,9 +124,9 @@ int			li_room_tube(char *line, t_lem *lst)
 	{
 		tab = ft_strsplit(line, ' ');
 		if (tab[3] != NULL)
-			return (0);
+			return (li_free_tab(tab));
 		li_check_coord(tab, lst);
-		free(tab);
+		li_free_tab(tab);
 		return (1);
 	}
 	return (0);

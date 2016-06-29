@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/10 09:39:27 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/28 10:43:42 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/29 15:00:11 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,18 +74,16 @@ int			li_get_start_end(char *line, t_lem *lst, int start)
 	if (line[0] == 'L' || line[0] == '#')
 		return (0);
 	tab = ft_strsplit(line, ' ');
+	free(line);
 	if (tab && tab[1] == NULL)
-		return (0);
+		return (li_free_tab(tab));
 	if (start == 1)
 		lst->name_start = ft_strdup(tab[0]);
 	else if (start == 2)
 		lst->name_end = ft_strdup(tab[0]);
 	if (li_check_coord(tab, lst) == 0 || tab[3] != NULL)
-	{
-		free(tab);
-		return (0);
-	}
-	free(tab);
+		return (li_free_tab(tab));
+	li_free_tab(tab);
 	return (1);
 }
 
@@ -131,8 +129,10 @@ int			li_get_ants(char *line, t_lem *lst)
 	{
 		lst->error = 1;
 		lst->ants = nb;
+		free(line);
 		return (0);
 	}
 	lst->ants = nb;
+	free(line);
 	return (1);
 }

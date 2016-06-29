@@ -6,7 +6,7 @@
 /*   By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/22 15:26:51 by tvisenti          #+#    #+#             */
-/*   Updated: 2016/06/29 13:03:04 by tvisenti         ###   ########.fr       */
+/*   Updated: 2016/06/29 15:14:33 by tvisenti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,19 @@ int			li_parse(char *line, t_lem *lst)
 			li_sharp(line, lst);
 		else if (li_room_tube(line, lst) == 0)
 			lst->error = 1;
+		if (lst->error == 0)
+			free(line);
 	}
 	if (lst->error == 1)
+	{
 		ft_printf("%s\n", line);
+		free(line);
+	}
 	while (lst->error == 1 && get_next_line(0, &line) > 0)
+	{
 		ft_printf("%s\n", line);
+		free(line);
+	}
 	if (lst->tube == 0)
 		lst->error = 1;
 	return (1);
@@ -45,6 +53,8 @@ int			main(void)
 	lst = li_lstnew();
 	if (li_parse(line, lst) == 0 || lst->start_end != 2)
 	{
+		li_free_salle(lst);
+		free(lst);
 		ft_printf("\nMerci de mettre un chemin valide.\n");
 		return (0);
 	}
@@ -54,5 +64,7 @@ int			main(void)
 		ft_printf("\nLes fourmis sont parties dans une autre fourmilière.\n");
 	else
 		ft_printf("\nLes tubes ne relient pas start à end / aucune salle.\n");
+	li_free_salle(lst);
+	li_free_lst(lst);
 	return (0);
 }

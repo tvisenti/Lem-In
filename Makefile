@@ -6,7 +6,7 @@
 #    By: tvisenti <tvisenti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/06/08 10:27:37 by tvisenti          #+#    #+#              #
-#    Updated: 2016/06/29 13:07:10 by tvisenti         ###   ########.fr        #
+#    Updated: 2016/06/29 14:53:37 by tvisenti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC_NAME =	lem_in.c\
 LIB_NAME =	li_lstadd.c\
 			li_lstnew.c\
 			li_strnlen.c\
+			li_free.c\
 
 INC_NAME =	lem-in.h\
 
